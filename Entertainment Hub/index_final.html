@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entertainment Hub - Premium Booking Experience</title>
+    <link rel="stylesheet" href="style_updated.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="https://pplx-res.cloudinary.com/image/upload/v1755354968/pplx_project_search_images/b272e7753e9d258a839c31caf010f0c875bc5576.png" alt="Logo" class="nav-logo">
+                <h2>ENTERTAINMENT HUB</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="#" class="nav-link active" data-section="home">Home</a>
+                <a href="#" class="nav-link" data-section="movies">Movies</a>
+                <a href="#" class="nav-link" data-section="concerts">Concerts</a>
+                <a href="#" class="nav-link" data-section="seats">Seats</a>
+                <a href="#" class="nav-link" data-section="ticket">Ticket</a>
+                <a href="#" class="nav-link" data-section="payment">Payment</a>
+                <a href="#" class="nav-link" data-section="bookings">My Bookings</a>
+            
+                <button id="darkModeToggle" class="btn btn--secondary dark-mode-toggle" title="Toggle Dark Mode">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">ENTERTAINMENT HUB</h1>
+                    <p class="hero-tagline">Experience Premium Entertainment Like Never Before</p>
+                    <div class="hero-description">
+                        <p>Book movies at top cinemas and attend exclusive concerts with premium seating</p>
+                    </div>
+                    <div class="hero-actions">
+                        <button class="btn btn--primary btn--lg" onclick="showSection('movies')">Book Movies</button>
+                        <button class="btn btn--outline btn--lg" onclick="showSection('concerts')">Book Concerts</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="featured-section">
+                <div class="featured-movies">
+                    <h3>Featured Movies</h3>
+                    <div class="featured-grid" id="featuredMovies"></div>
+                </div>
+                <div class="featured-concerts">
+                    <h3>Upcoming Concerts</h3>
+                    <div class="featured-grid" id="featuredConcerts"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Movies Section -->
+        <section id="movies" class="section">
+            <div class="section-header">
+                <h2>Movies Now Showing</h2>
+                <div class="filters">
+                    <select id="citySelector" class="form-control">
+                        <option value="mumbai">Mumbai</option>
+                        <option value="delhi">Delhi</option>
+                    </select>
+                </div>
+            </div>
+            <div class="content-grid" id="moviesGrid"></div>
+        </section>
+
+        <!-- Concerts Section -->
+        <section id="concerts" class="section">
+            <div class="section-header">
+                <h2>Upcoming Concerts & Shows</h2>
+                <div class="filters">
+                    <select id="concertCitySelector" class="form-control">
+                        <option value="mumbai">Mumbai</option>
+                        <option value="delhi">Delhi</option>
+                    </select>
+                </div>
+            </div>
+            <div class="content-grid" id="concertsGrid"></div>
+        </section>
+
+        <!-- Venue/Theatre Selection -->
+        <section id="venues" class="section">
+            <div class="section-header">
+                <h2 id="venueTitle">Select Venue & Timing</h2>
+                <button class="btn btn--secondary" onclick="goBack()">← Back</button>
+            </div>
+            <div class="selected-item-info" id="selectedItemInfo"></div>
+            <div class="venues-list" id="venuesList"></div>
+        </section>
+
+        <!-- Seat Selection -->
+        <section id="seats" class="section">
+            <div class="section-header">
+                <h2>Select Your Seats</h2>
+                <button class="btn btn--secondary" onclick="showSection('venues')">← Back to Venues</button>
+            </div>
+            <div class="booking-info" id="bookingInfo"></div>
+            <div class="seat-selection-container">
+                <div class="screen-indicator">
+                    <div class="screen">SCREEN / STAGE</div>
+                </div>
+                <div class="seat-map" id="seatMap"></div>
+                <div class="seat-legend">
+                    <div class="legend-item">
+                        <div class="seat-demo available"></div>
+                        <span>Available</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="seat-demo selected"></div>
+                        <span>Selected</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="seat-demo booked"></div>
+                        <span>Booked</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="seat-demo premium"></div>
+                        <span>Premium</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="seat-demo vip"></div>
+                        <span>VIP</span>
+                    </div>
+                </div>
+            </div>
+            <div class="booking-summary">
+                <div class="summary-content">
+                    <h3>Booking Summary</h3>
+                    <div class="selected-seats-list" id="selectedSeatsList">
+                        <p>No seats selected</p>
+                    </div>
+                    <div class="total-amount" id="totalAmount">Total: ₹0</div>
+                    <button class="btn btn--primary btn--full-width" id="proceedToTicketBtn" disabled onclick="showSection('ticket')">Proceed to Ticket</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ticket Issue Section -->
+        <section id="ticket" class="section">
+            <div class="section-header">
+                <h2>Your Ticket</h2>
+                <button class="btn btn--secondary" onclick="showSection('seats')">← Back to Seats</button>
+            </div>
+            <div class="ticket-container">
+                <div class="ticket-preview" id="ticketPreview">
+                    <div class="ticket-header">
+                        <div class="ticket-logo">
+                            <h3>ENTERTAINMENT HUB</h3>
+                        </div>
+                        <div class="ticket-id" id="ticketId">Ticket ID: #EH-2024-001</div>
+                    </div>
+                    <div class="ticket-content">
+                        <div class="ticket-main-info" id="ticketMainInfo"></div>
+                        <div class="ticket-details" id="ticketDetails"></div>
+                        <div class="ticket-qr">
+                            <div class="qr-code" id="qrCode">
+                                <canvas id="qrCanvas" width="100" height="100"></canvas>
+                            </div>
+                            <p>Scan QR code for entry</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn--primary btn--lg btn--full-width" onclick="showSection('payment')">Proceed to Payment</button>
+            </div>
+        </section>
+
+        <!-- Payment Section -->
+        <section id="payment" class="section">
+            <div class="section-header">
+                <h2>Payment Options</h2>
+                <button class="btn btn--secondary" onclick="showSection('ticket')">← Back to Ticket</button>
+            </div>
+            <div class="payment-container">
+                <div class="payment-summary" id="paymentSummary"></div>
+                <div class="payment-methods">
+                    <h3>Choose Payment Method</h3>
+                    <div class="payment-options">
+                        <div class="payment-option" onclick="selectPaymentMethod('cash')">
+                            <div class="payment-icon">💵</div>
+                            <div class="payment-info">
+                                <h4>Cash Payment</h4>
+                                <p>Pay at venue counter</p>
+                            </div>
+                            <div class="payment-radio">
+                                <input type="radio" name="payment" value="cash" id="cash">
+                            </div>
+                        </div>
+                        <div class="payment-option" onclick="selectPaymentMethod('card')">
+                            <div class="payment-icon">💳</div>
+                            <div class="payment-info">
+                                <h4>Credit/Debit Card</h4>
+                                <p>Secure online payment</p>
+                            </div>
+                            <div class="payment-radio">
+                                <input type="radio" name="payment" value="card" id="card">
+                            </div>
+                        </div>
+                        <div class="payment-option" onclick="selectPaymentMethod('upi')">
+                            <div class="payment-icon">📱</div>
+                            <div class="payment-info">
+                                <h4>UPI Payment</h4>
+                                <p>Pay with UPI apps</p>
+                            </div>
+                            <div class="payment-radio">
+                                <input type="radio" name="payment" value="upi" id="upi">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Payment Forms -->
+                <div id="cardForm" class="payment-form hidden">
+                    <h4>Enter Card Details</h4>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Card Number" maxlength="19">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="MM/YY" maxlength="5">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="CVV" maxlength="3">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Cardholder Name">
+                    </div>
+                </div>
+
+                <div id="upiForm" class="payment-form hidden">
+                    <h4>UPI Payment</h4>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter UPI ID (example@upi)">
+                    </div>
+                    <div class="upi-qr">
+                        <div class="qr-placeholder">UPI QR Code</div>
+                        <p>Scan with any UPI app</p>
+                    </div>
+                </div>
+
+                <button class="btn btn--primary btn--lg btn--full-width" id="completePaymentBtn" disabled onclick="processPayment()">Complete Booking</button>
+            </div>
+        </section>
+
+        <!-- My Bookings -->
+        <section id="bookings" class="section">
+            <div class="section-header">
+                <h2>My Bookings</h2>
+                <div class="filters">
+                    <select class="form-control">
+                        <option value="all">All Bookings</option>
+                        <option value="movies">Movies</option>
+                        <option value="concerts">Concerts</option>
+                    </select>
+                </div>
+            </div>
+            <div class="bookings-list" id="bookingsList"></div>
+        </section>
+
+        <!-- Success Modal -->
+        <div id="successModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="success-animation">
+                    <div class="success-icon">✓</div>
+                    <h3>Booking Completed Successfully!</h3>
+                    <p>Your booking has been confirmed. Check your email for details.</p>
+                    <button class="btn btn--primary" onclick="closeSuccessModal()">View My Bookings</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="app_updated.js"></script>
+</body>
+</html>
