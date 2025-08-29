@@ -47,9 +47,9 @@ A professional dark-themed entertainment booking web application for movies and 
 ```
 entertainment-hub/
 │
-├── index.html          # Main HTML structure
-├── style.css           # Dark theme CSS styling
-├── app.js             # Core JavaScript functionality
+├── index_final.html          # Main HTML structure
+├── style_updated.css           # Dark theme CSS styling
+├── app_updaged.js             # Core JavaScript functionality
 └── README.md          # Project documentation
 ```
 
