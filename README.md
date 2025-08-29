@@ -1,6 +1,5 @@
 <img width="1885" height="925" alt="Screenshot 2025-08-30 035334" src="https://github.com/user-attachments/assets/01e9c5f3-821c-48ac-b0f6-5621c7434603" />
 
-<img width="1885" height="925" alt="Screenshot 2025-08-30 035334" src="https://github.com/user-attachments/assets/01e9c5f3-821c-48ac-b0f6-5621c7434603" />
 
 
 # 🎬 Entertainment Hub - Premium Booking Platform
